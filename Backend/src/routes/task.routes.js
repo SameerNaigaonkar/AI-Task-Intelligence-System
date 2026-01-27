@@ -10,5 +10,5 @@ const {allowRoles,Protect} = require("../middlewares/auth.middleware")
 
 router.post("/",Protect ,allowRoles("MANAGER"),taskController.createTask);
 router.get("/my",Protect,taskController.getUserTask);
-
+router.put("/:id",Protect,taskController.updatedTask)
 module.exports = router ;
