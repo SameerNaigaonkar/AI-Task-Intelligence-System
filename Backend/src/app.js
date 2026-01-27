@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 
 app.use("/auth",authroutes);
 app.use("/task",taskroutes);
-
+app.use("/updatedTask",taskroutes);
 
 
 module.exports = app;

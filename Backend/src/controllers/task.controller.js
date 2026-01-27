@@ -42,5 +42,34 @@ const getUserTask = async (req, res) => {
 
 
 
+const updatedTask = async (req,res) => {
 
-module.exports = { createTask, getUserTask }
+    console.log("jndajknadna",req.params)
+
+    try {
+        const task = await taskService.UpdateEmpTask(
+            req.params.id, 
+            req.user.id,
+            req.body.status
+        );
+        console.log("task",task);
+        
+        res.status(200).json({
+            success:true ,
+            task
+        })
+        
+    } catch (error) {
+        res.status(403).json({
+            success:false,
+            message :error.message
+        })
+        
+    }
+    
+}
+
+
+
+
+module.exports = { createTask, getUserTask,updatedTask }
