@@ -1,5 +1,6 @@
 const taskModel = require("../models/TaskModel");
-const mongoose  = require("mongoose")
+const mongoose = require("mongoose")
+const aiService = ("./")
 
 const createTask = async (data, ManagerId) => {
 
@@ -21,8 +22,31 @@ const createTask = async (data, ManagerId) => {
 
 const getTaskByUser = async (userId) => {
 
-    return await taskModel.find({ assignedTo: userId })
-    //    .sort({deadline :1})
+    return await taskModel.find({ assignedTo: userId }).sort({ deadline: 1 })
+
+}
+
+
+const UpdateEmpTask = async (taskId, userId, status) => {
+    console.log("taskId",taskId)
+
+    const updatedtask = await taskModel.findById(taskId)
+
+    if (!updatedtask) throw new Error("No task found");
+
+    //  to string is used to check in all consicuences like if it is string  
+    if (updatedtask.assignedTo.toString() !== userId) {
+
+        throw new Error("Not allowed");
+
+    }
+
+    updatedtask.status = status;
+    await updatedtask.save();
+
+    return updatedtask;
+
+
 
 }
 
@@ -35,4 +59,4 @@ const getTaskByUser = async (userId) => {
 
 
 
-module.exports = { createTask,getTaskByUser }
+module.exports = { createTask, getTaskByUser, UpdateEmpTask }

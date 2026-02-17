@@ -31,6 +31,11 @@ const taskModel = new mongoose.Schema({
 
     },
 
+    aiSummary: String,
+    aiEffort: String,
+    aiRisk: String,
+
+
     deadline: Date,
 
 
@@ -41,6 +46,6 @@ const taskModel = new mongoose.Schema({
 )
 
 
-module.exports = mongoose.model("taskModel",taskModel);
+module.exports = mongoose.model("Task", taskModel);
 
 
