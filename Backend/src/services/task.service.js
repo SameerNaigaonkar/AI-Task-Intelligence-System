@@ -1,9 +1,15 @@
 const taskModel = require("../models/TaskModel");
 const mongoose = require("mongoose")
-const aiService = ("./")
+const aiService = require("./ai.service")
 
 const createTask = async (data, ManagerId) => {
 
+    let aiData = null ;
+
+
+    if(data.description){
+        aiData = await aiService.generateTaskSummary(data.description);
+    }
     const task = await taskModel.create({
 
         title: data.title,
