@@ -46,6 +46,6 @@ const taskModel = new mongoose.Schema({
 )
 
 
-module.exports = mongoose.model("Task", taskModel);
+module.exports = mongoose.model("taskModel",taskModel);
 
 
